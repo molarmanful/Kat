@@ -143,7 +143,10 @@ setInterval(x=>{
     count++;
   else if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat')
     count=0,
-    post=0|Math.random()*5000
+    post=0|Math.random()*5000,
     last=$('.messages .content').last().text(),
     say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent);
+  else
+    count=0,
+    post=0|Math.random()*5000;
 },1);
