@@ -1,5 +1,6 @@
 last=$('.messages .content').last().text();
-say=_=>{$('#input').val(_);$('#sayit-button').trigger('click')};
+String.prototype.treplace=function(x,y=x.reverse(),a=Math.max(x.length,y.length),b=Math.min(x.length,y.length),i=0,t=this){for(;i<a;i++)t=t.replace(RegExp(x[i],"ig"),y[i%b]);return t};
+say=_=>{$('#input').val(`@${$('.username').last().text()} `+_);$('#sayit-button').trigger('click')};
 faces=[
   "｡＾･ｪ･＾｡",
   "( ͒ ु- •̫̮ – ू ͒)",
@@ -137,16 +138,25 @@ faces=[
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
 count=0;
-post=0|Math.random()*5000;
+post=0|Math.random()*2000;
 setInterval(x=>{
   if(count<post)
     count++;
-  else if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat')
-    count=0,
-    post=0|Math.random()*5000,
-    last=$('.messages .content').last().text(),
-    say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent);
-  else
-    count=0,
-    post=0|Math.random()*5000;
+  else {
+    count=0|-Math.random()*2000,
+    post=0|Math.random()*2000;
+    if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat'){
+      last=$('.messages .content').last().text(),
+      if(last.match(/(@?Kat)? +H(i|ello|ey) +(@?Kat)?/i))
+        say(`@${$('.username').last().text()} Hello. Meow.`)
+      else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( a)? face/i))
+        say(faces[0|Math.random()*faces.length]);
+      else if(m=last.match(/i +don'?t +(\w+)/i))
+        say(`Of course you don't ${m[1]}. When did you ever?`);
+      else if(last.match(/i'm not sure/i))
+        say("Of course you're not sure.");
+      else
+        say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent.replace(/^@.+? +/g,''));
+    }
+  }
 },1);
