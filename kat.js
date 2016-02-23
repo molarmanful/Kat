@@ -149,12 +149,14 @@ setInterval(x=>{
       last=$('.messages .content').last().text();
       if(last.match(/(@?Kat +)?h(i|ello|ey)( +@?Kat)?/i))
         say(`Hello. Meow.`);
-      else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( a)? face/i))
+      else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face/i))
         say(faces[0|Math.random()*faces.length]);
-      else if(m=last.match(/i +don('| no|)t +(\w+)/i))
+      else if(m=last.match(/i +don(?:'| no|)t +(\w+)/i))
         say(`Of course you don't ${m[1]}. When did you ever?`);
       else if(last.match(/i'm not sure/i))
-        say("Of course you're not sure.");
+        say("Of course you're not sure. When were you ever?");
+      else if(m=last.match(/i +can(?:'| *no|)t +(\w+)/i))
+        say(`Of course you don't ${m[1]}. When did you ever?`);
       else
         rsay();
     }
