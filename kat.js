@@ -136,8 +136,14 @@ faces=[
   "=^._.^= ∫",
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
+count=0;
+post=0|Math.random()*5000;
 setInterval(x=>{
-  if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat')
+  if(count<post)
+    count++;
+  else if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat')
+    count=0,
+    post=0|Math.random()*5000
     last=$('.messages .content').last().text(),
     say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent);
 },1);
