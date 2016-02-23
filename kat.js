@@ -158,5 +158,7 @@ setInterval(x=>{
       else
         rsay();
     }
+    else if($('.username').last().text()!='Kat')
+      rsay();
   }
 },1);
