@@ -1,6 +1,6 @@
 last=$('.messages .content').last().text();
-String.prototype.treplace=function(x,y=x.reverse(),a=Math.max(x.length,y.length),b=Math.min(x.length,y.length),i=0,t=this){for(;i<a;i++)t=t.replace(RegExp(x[i],"ig"),y[i%b]);return t};
 say=_=>{$('#input').val(`@${$('.username').last().text()} `+_);$('#sayit-button').trigger('click')};
+rsay=_=>say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent.replace(/^@.+? +/g,''));
 faces=[
   "｡＾･ｪ･＾｡",
   "( ͒ ु- •̫̮ – ू ͒)",
@@ -156,7 +156,7 @@ setInterval(x=>{
       else if(last.match(/i'm not sure/i))
         say("Of course you're not sure.");
       else
-        say(Math.random()<.1?faces[0|Math.random()*faces.length]:$('.messages .content').get(0|Math.random()*$('.messages .content').length).textContent.replace(/^@.+? +/g,''));
-    }
+        rsay();
+    } else rsay();
   }
 },1);
