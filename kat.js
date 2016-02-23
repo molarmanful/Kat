@@ -146,7 +146,7 @@ setInterval(x=>{
     count=0|-Math.random()*2000,
     post=0|Math.random()*2000;
     if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat'){
-      last=$('.messages .content').last().text(),
+      last=$('.messages .content').last().text();
       if(last.match(/(@?Kat)? +H(i|ello|ey) +(@?Kat)?/i))
         say(`@${$('.username').last().text()} Hello. Meow.`);
       else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( a)? face/i))
