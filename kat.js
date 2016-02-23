@@ -157,6 +157,6 @@ setInterval(x=>{
         say("Of course you're not sure.");
       else
         rsay();
-    } else rsay();
+    }
   }
 },1);
