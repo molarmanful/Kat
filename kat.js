@@ -151,7 +151,7 @@ setInterval(x=>{
         say(`Hello. Meow.`);
       else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face/i))
         say(faces[0|Math.random()*faces.length]);
-      else if(m=last.match(/i +don(?:'| no|)t +(\w+)/i))
+      else if(m=last.match(/i +do(?:n'?| no)t +(\w+)/i))
         say(`Of course you don't ${m[1]}. When did you ever?`);
       else if(last.match(/i'm not sure/i))
         say("Of course you're not sure. When were you ever?");
