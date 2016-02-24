@@ -1,6 +1,6 @@
 last=$('.messages .content').last().text();
 say=_=>{$('#input').val(`@${$('.username').last().text()} `+_);$('#sayit-button').trigger('click')};
-rsay=_=>say(Math.random()<.1?faces[0|Math.random()*faces.length]:(fil=$('.messages .content').filter(x=>!$(this).text().match(/Kat/)&&!$('.username').get(x).textContent.match(/Kat/))).get(0|Math.random()*fil.length).textContent.replace(/^@.+? +/g,''));
+rsay=_=>say(Math.random()<.1?faces[0|Math.random()*faces.length]:(fil=$('.messages .content').filter(x=>!$(this).text().match(/Kat/i)&&!$('.username').get(x).textContent.match(/Kat/))).get(0|Math.random()*fil.length).textContent.replace(/^@.+? +/g,''));
 faces=[
   "｡＾･ｪ･＾｡",
   "( ͒ ु- •̫̮ – ू ͒)",
