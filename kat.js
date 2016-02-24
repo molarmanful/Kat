@@ -143,11 +143,11 @@ setInterval(x=>{
   if(count<post)
     count++;
   else {
-    count=0|-Math.random()*2000,
+    count=0,
     post=0|Math.random()*2000;
     if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat'){
       last=$('.messages .content').last().text();
-      if(last.match(/(@?Kat +)?h(i|ello|ey)( +@?Kat)?/i))
+      if(last.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
         say(`Hello. Meow.`);
       else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face/i))
         say(faces[0|Math.random()*faces.length]);
