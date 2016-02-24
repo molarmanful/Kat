@@ -155,8 +155,8 @@ setInterval(x=>{
         say(`Of course you don't ${m[1]}. When did you ever?`);
       else if(last.match(/i'm not sure/i))
         say("Of course you're not sure. When were you ever?");
-      else if(m=last.match(/i +can(?:'| *no|)t +(\w+)/i))
-        say(`Of course you can't ${m[1]}. When could you ever?`);
+      else if(x=last.match(/i +can(?:'| *no|)t +(\w+)/i))
+        say(`Of course you can't ${x[1]}. When could you ever?`);
       else
         rsay();
     }
