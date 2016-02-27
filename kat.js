@@ -1,5 +1,5 @@
 last=$('.messages .content').last().text();
-say=_=>{$('#input').val(`@${$('.username').last().text()} `+_);$('#sayit-button').trigger('click')};
+say=_=>{$('#input').val(`@${$('.username').last().text().replace(/\s/g,'')} `+_);$('#sayit-button').trigger('click')};
 rsay=_=>say(Math.random()<.1?faces[0|Math.random()*faces.length]:(fil=$('.messages .content').filter(x=>!$(this).text().match(/Kat/i)&&!$('.username').get(x).textContent.match(/Kat/))).get(0|Math.random()*fil.length).textContent.replace(/^@.+? +/g,''));
 faces=[
   "｡＾･ｪ･＾｡",
@@ -153,7 +153,7 @@ setInterval(x=>{
         say(faces[0|Math.random()*faces.length]);
       else if(m=last.match(/i +do(?:n'?| no)t +(\w+)/i))
         say(`Of course you don't ${m[1]}. When did you ever?`);
-      else if(last.match(/i'm not sure/i))
+      else if(last.match(/i('| a)m not sure/i))
         say("Of course you're not sure. When were you ever?");
       else if(x=last.match(/i +can(?:'| *no|)t +(\w+)/i))
         say(`Of course you can't ${x[1]}. When could you ever?`);
