@@ -139,7 +139,7 @@ faces=[
 ];
 Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function(){
   past=[];
-  $('.messages .content').each(function(){/Kat|\(removed\)/i.test($(this).text())||past.push($(this).text())});
+  $('.messages .content').each(function(){/Kat|\(removed\)|h(i|ello|ey)/i.test($(this).text())||past.push($(this).text())});
   if(this.User!='Kat'){
     if(this.Text.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
       this.Reply(`Hello. Meow.`);
@@ -152,8 +152,8 @@ Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function
     else if(x=this.Text.match(/i +can(?:'| *no|)t +(\w+)/i))
       this.Reply(`Of course you can't ${x[1]}. When could you ever?`);
     else
-      this.Speak(past[0|Math.random()*past.length].replace(/@.+? +/g,''))
+      this.Speak(past[0|Math.random()*past.length].replace(/@.+? +/g,''));
   }
   else if(this.User!='Kat')
-    rsay();
+    this.Speak(past[0|Math.random()*past.length].replace(/@.+? +/g,''));
 })
