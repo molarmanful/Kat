@@ -143,7 +143,7 @@ Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function
   if($('.username').last().text()!='Kat'){
     if(this.Text.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
       this.Reply(`Hello. Meow.`);
-    else if(this.Text.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face|how (are|r) (you|u)/i))
+    else if(this.Text.match(/:[()|[\]opds^/\\]|._+.|gi(m|ve +)me( +a)? +face|how (are|r) (you|u)/i))
       this.Reply(faces[0|Math.random()*faces.length]);
     else if(m=this.Text.match(/i +do(?:n'?| no)t +(\w+)/i))
       this.Reply(`Of course you don't ${m[1]}. When did you ever?`);
