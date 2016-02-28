@@ -139,6 +139,12 @@ faces=[
 ];
 count=0;
 post=0|Math.random()*1500+1000;
+say(`
+    | | / /   /\ |_   _\    ˰ ˰
+    | |/ /   /  \  | |  ) =(ↀ˳̫ↀ)=
+    | |\ \  / /\ \ | | (   /  )
+    |_| \_\/_/  \_\|_|  \_(__)|
+_I'm back._`)
 setInterval(x=>{
   if(count<post)
     count++;
