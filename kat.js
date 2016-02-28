@@ -139,7 +139,7 @@ faces=[
 ];
 count=0;
 post=0|Math.random()*1500+1000;
-say(`_Kat has entered the room!_`);
+$('#input').val(`_Kat has entered the room!_`);$('#sayit-button').trigger('click');
 setInterval(x=>{
   if(count<post)
     count++;
