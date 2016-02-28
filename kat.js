@@ -1,6 +1,6 @@
-last=$('.messages .content').last().text();
-say=_=>{$('#input').val(`@${$('.username').last().text().replace(/\s/g,'')} `+_);$('#sayit-button').trigger('click')};
-rsay=_=>say(Math.random()<.1?faces[0|Math.random()*faces.length]:(fil=$('.messages .content').filter(x=>!$(this).text().match(/Kat/i))).get(0|Math.random()*fil.length).textContent.replace(/^@.+? +/g,''));
+//SEChatbot plugin by @Downgoat
+function _toConsumableArray(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}function _classCallCheck(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}var Talk=function(t){document.getElementById("input").value=t,document.getElementById("sayit-button").click()},Data=function(t,e){return t.replace(/\$([A-Za-z$_]+[A-Za-z$_0-9]*)/g,function(t,n){return e[n]})},Chatbot=function t(e,n,a){void 0===e&&(e="a Chatbot");var r=this,u=arguments.length<=1||void 0===arguments[1]?{}:arguments[1],s=u.Startup,o=void 0===s?"Hi my name is $Name!":s,i=u.UID,l=void 0===i?0:i;_classCallCheck(this,t),this.Name=e,this.Options={Startup:Data(o,this),UID:l},this.onmessage=a||function(){},this.Queue=[];var c=Symbol("Called");this[c]=new Set,Talk(this.Options.Startup),setInterval(function(){[].concat(_toConsumableArray(document.getElementsByClassName("message"))).filter(function(t,e,n){return r[c].has(t)?!1:(r[c].add(t),(t.parentElement.parentElement.className.match(/user-(\d+)/)||[0,l])[1]!=l&&e>n.map(function(t){return t.textContent.trim()}).lastIndexOf(r.Options.Startup))}).forEach(function(t){return r.onmessage.call({Text:t.textContent.trim(),HTML:t.innerHTML,Raw:t,User:t.parentElement.parentElement.getElementsByClassName("username")[0].textContent.trim(),Mentions:[].concat(_toConsumableArray(t.querySelectorAll(".mention"))).map(function(t){return(t.textContext||"").slice(1)}),Speak:function(t){return r.Queue.push(t)},Reply:function(e){return r.Queue.push(":"+t.id.split("-")[1]+" "+e)},"super":r})})},2100),setInterval(function(){r.Queue[0]&&Talk(r.Queue.shift())},2e3)};
+
 faces=[
   "｡＾･ｪ･＾｡",
   "( ͒ ु- •̫̮ – ू ͒)",
@@ -137,31 +137,23 @@ faces=[
   "=^._.^= ∫",
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
-count=0;
-post=0|Math.random()*1500+1000;
-$('#input').val(`_Kat has entered the room!_`);$('#sayit-button').trigger('click');
-setInterval(x=>{
-  if(count<post)
-    count++;
-  else {
-    count=0,
-    post=0|Math.random()*1500+1000;
-    if($('.messages .content').last().text()!=last&&$('.username').last().text()!='Kat'){
-      last=$('.messages .content').last().text();
-      if(last.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
-        say(`Hello. Meow.`);
-      else if(last.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face|how (are|r) (you|u)/i))
-        say(faces[0|Math.random()*faces.length]);
-      else if(m=last.match(/i +do(?:n'?| no)t +(\w+)/i))
-        say(`Of course you don't ${m[1]}. When did you ever?`);
-      else if(last.match(/i('| a)m not sure/i))
-        say("Of course you're not sure. When were you ever?");
-      else if(x=last.match(/i +can(?:'| *no|)t +(\w+)/i))
-        say(`Of course you can't ${x[1]}. When could you ever?`);
-      else
-        rsay();
-    }
-    else if($('.username').last().text()!='Kat')
-      rsay();
+Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},x=>{
+  past=[];
+  $('.messages .content').each(function(){/Kat|\(removed\)/i.test($(this).text())||past.push($(this).text())});
+  if(this.User!='Kat'){
+    if(this.Text.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
+      this.Reply(`Hello. Meow.`);
+    else if(this.Text.match(/:[()|[\]opds^]|._+.|gi(m|ve +)me( +a)? +face|how (are|r) (you|u)/i))
+      this.Reply(faces[0|Math.random()*faces.length]);
+    else if(m=this.Text.match(/i +do(?:n'?| no)t +(\w+)/i))
+      this.Reply(`Of course you don't ${m[1]}. When did you ever?`);
+    else if(this.Text.match(/i('| a)m not sure/i))
+      this.Reply("Of course you're not sure. When were you ever?");
+    else if(x=this.Text.match(/i +can(?:'| *no|)t +(\w+)/i))
+      this.Reply(`Of course you can't ${x[1]}. When could you ever?`);
+    else
+      this.Speak(past[0|Math.random()*past.length].replace(/@.+? +/g,''))
   }
-},1);
+  else if(this.User!='Kat')
+    rsay();
+})
