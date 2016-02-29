@@ -137,9 +137,8 @@ faces=[
   "=^._.^= ∫",
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
-$.getScript("http://chancejs.com/chance.min.js");
 Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function(){
-  past=[...Array(50)].map(x=>chance.sentence());
+  past=[];
   $('.messages .content').each(function(){/Kat|\(removed\)|h(i|ello|ey)/i.test($(this).text())||past.push($(this).text())});
   if($('.username').last().text()!='Kat'){
     if(this.Text.match(/(@?Kat +)?h(i|ello|ey)((, )? +@?Kat)?/i))
