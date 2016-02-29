@@ -153,6 +153,6 @@ Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function
     else if(x=this.Text.match(/i +can(?:'| *no|)t +(\w+)/i))
       this.Reply(`Of course you can't ${x[1]}. When could you ever?`);
     else
-      this.Speak(past[0|Math.random()*past.length].replace(/@.+? +/g,''));
+      this.Reply(past[0|Math.random()*past.length].replace(/@.+? +/g,''));
   }
 })
