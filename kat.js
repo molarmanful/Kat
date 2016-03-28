@@ -1,4 +1,50 @@
-function _toConsumableArray(t){if(Array.isArray(t)){for(var e=0,n=Array(t.length);e<t.length;e++)n[e]=t[e];return n}return Array.from(t)}function _classCallCheck(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}var Talk=function(t){document.getElementById("input").value=t,document.getElementById("sayit-button").click()},Data=function(t,e){return t.replace(/\$([A-Za-z$_]+[A-Za-z$_0-9]*)/g,function(t,n){return e[n]})},Chatbot=function t(e,n,a){void 0===e&&(e="a Chatbot");var r=this,u=arguments.length<=1||void 0===arguments[1]?{}:arguments[1],s=u.Startup,o=void 0===s?"Hi my name is $Name!":s;_classCallCheck(this,t),this.Name=e,this.Options={Startup:Data(o,this),UID:CHAT.CURRENT_USER_ID},this.onmessage=a||function(){return void 0},this.Queue=[];var i=Symbol("Called");this[i]=new Set,Talk(this.Options.Startup),setInterval(function(){[].concat(_toConsumableArray(document.getElementsByClassName("message"))).filter(function(t,e,n){return r[i].has(t)?!1:(r[i].add(t),(t.parentElement.parentElement.className.match(/user-(\d+)/)||[0,this.Options.UID])[1]!=this.Options.UID&&e>n.map(function(t){return t.textContent.trim()}).lastIndexOf(r.Options.Startup))}).forEach(function(t){return r.onmessage.call({Text:t.textContent.trim(),HTML:t.innerHTML,Raw:t,User:t.parentElement.parentElement.getElementsByClassName("username")[0].textContent.trim(),Mentions:[].concat(_toConsumableArray(t.querySelectorAll(".mention"))).map(function(t){return(t.textContext||"").slice(1)}),Speak:function(t){return r.Queue.push(t)},Reply:function(e){return r.Queue.push(":"+t.id.split("-")[1]+" "+e)},Star:function(e){return t.querySelector(".meta > .stars > .vote").click()},"super":r})})},2100),setInterval(function(){r.Queue[0]&&Talk(r.Queue.shift())},2500)};
+const Talk = text => { document.getElementById("input").value = text; document.getElementById("sayit-button").click() }
+const Data = (text, instance) => text.replace(/\$([A-Za-z$_]+[A-Za-z$_0-9]*)/g, (_, v) => instance[v])
+
+class Chatbot {
+  constructor(Name = "a Chatbot", { Startup = "Hi my name is $Name!" } = {}, onmessage) {
+    this.Name = Name;
+    this.Options = { Startup: Data(Startup, this), UID: CHAT.CURRENT_USER_ID };
+    this.onmessage = onmessage || () => void 0;
+
+    this.Queue = [];
+    // Private
+    let Called = Symbol("Called");
+
+    this[Called] = new Set();
+
+    // Startup
+    Talk(this.Options.Startup);
+
+    // Read
+    setInterval(() => {
+      [...document.getElementsByClassName("message")].filter((message, index, transcript) => {
+        if (this[Called].has(message)) return false;
+        else this[Called].add(message);
+        return ( message.parentElement.parentElement.className.match(/user-(\d+)/) || [0, UID] )[1] != UID &&
+          index > transcript.map(t => t.textContent.trim()).lastIndexOf(this.Options.Startup)
+      }).forEach(message => this.onmessage.call({
+        "Text": message.textContent.trim()/*.replace(/\b[a-z\.]+(?:com|org|net|xyz)/g, "http://$&")*/,
+        "HTML": message.innerHTML,
+        "Raw" : message,
+
+        "User": message.parentElement.parentElement.getElementsByClassName("username")[0].textContent.trim(),
+
+        "Mentions": [...message.querySelectorAll(".mention")].map(m => (m.textContext||"").slice(1)),
+
+        "Speak": Text => this.Queue.push(Text),
+        "Reply": Text => this.Queue.push(`:${message.id.split("-")[1]} ${Text}`),
+        "Star" : Text => message.querySelector(".meta > .stars > .vote").click(),
+        
+        "super": this
+      }));
+    }, 2100);
+
+    setInterval(() => {
+      if (this.Queue[0]) Talk(this.Queue.shift());
+    }, 2500);
+  }
+}
 
 faces=[
   "｡＾･ｪ･＾｡",
@@ -137,7 +183,7 @@ faces=[
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
 
-Kat=new Chatbot('Kat',{UID:193997,Startup:'_Kat has entered the room!_'},function(){
+Kat=new Chatbot('Kat',{Startup:'_Kat has entered the room!_'},function(){
   past=[];
   $('.messages .content').each(function(){/Kat|\(removed\)|h(i|ello|ey)/i.test($(this).text())||past.push($(this).text())});
   if($('.username').last().text()!='Kat'){
