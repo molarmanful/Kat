@@ -2,7 +2,7 @@ const Talk = text => { document.getElementById("input").value = text; document.g
 const Data = (text, instance) => text.replace(/\$([A-Za-z$_]+[A-Za-z$_0-9]*)/g, (_, v) => instance[v])
 
 class Chatbot {
-  constructor(Name = "a Chatbot", { Startup = "Hi my name is $Name!" } = {}, onmessage) {
+  constructor(Name = "a Chatbot", { Startup : "Hi my name is $Name!" } = {}, onmessage) {
     this.Name = Name;
     this.Options = { Startup: Data(Startup, this), UID: CHAT.CURRENT_USER_ID };
     this.onmessage = onmessage || () => void 0;
