@@ -138,7 +138,7 @@ faces=[
   "ଲ(⁃̗̀̂❍⃓ˑ̫❍⃓⁃̠́̂)ଲ"
 ];
 
-Kat=new Chatbot('Kat',{Startup:'_Kat has entered the room!_'},function(){
+Kat=new Chatbot('Kat',{UID:51539,Startup:'_Kat has entered the room!_'},function(){
   past=[];
   $('.messages .content').each(function(){/Kat|\(removed\)|h(i|ello|ey)/i.test($(this).text())||past.push($(this).text())});
   if($('.username').last().text()!='Kat'){
